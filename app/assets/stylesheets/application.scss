@@ -1,19 +1,4 @@
 /*
-Error: File to import not found or unreadable: bootstrap.
-        on line 16 of /home/ec2-user/environment/bookers2/app/assets/stylesheets/application.scss
-
-11:  * It is generally better to create a new file per style scope.
-12:  *
-13:  *= require_tree .
-14:  *= require_self
-15:  *\/
-16: @import "bootstrap";
-17: @import 'font-awesome-sprockets';
-18: @import 'font-awesome';
-19:
-20:
-21: .navbar {
-
 Backtrace:
 /home/ec2-user/environment/bookers2/app/assets/stylesheets/application.scss:16
 /home/ec2-user/.rvm/gems/ruby-2.6.3/gems/sass-3.7.4/lib/sass/tree/import_node.rb:67:in `rescue in import'
@@ -60,8 +45,6 @@ Backtrace:
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
-
-
 
 
 .navbar {
