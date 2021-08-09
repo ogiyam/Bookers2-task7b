@@ -4,9 +4,11 @@ class BooksController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
 
   def index
+    to = Time.current.at_end_of_day 
+    from = (to - 6.day).at_beginning_of_day
+    @books = Book.all.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
     @user = current_user
     @new_book = Book.new
-    @books = Book.all.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
   end
 
   def create
