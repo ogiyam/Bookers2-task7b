@@ -20,20 +20,56 @@
                   </tr>
               </thead>
               <tbody>
-                   <% @books.each do |book| %>
-                     <tr>
-                        <td>
-                          <%= link_to user_path(@user) do %>
-                             <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "50x50" %>
-                          <% end %>
-                        </td>
-                        <td><%= link_to book.title, book_path(book.id) %></td>
-                        <td><%= book.body %></td>
-                        <td>コメント数：<%= book.book_comments.count %></td>
-                     </tr>
-                   <% end %>
+                 <% @books.each do |book| %>
+                 <tr>
+                    <td>
+                    <%= link_to user_path(@user) do %>
+                    <%= attachment_image_tag @user, :profile_image, fallback: "no_image.jpg", size: "50x50" %>
+                    <% end %>
+                    </td>
+                    <td><%= link_to book.title, book_path(book.id) %></td>
+                    <td><%= book.body %></td>
+                    <td>コメント数：<%= book.book_comments.count %></td>
+                 </tr>
+                 <% end %>
               </tbody>
   　　　　  </table>
 　  </div>
 　</div>
 </div>
+
+<h3>投稿数の前日比・前週比</h3>
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <th>今日の投稿数</th>
+            <th>前日の投稿数</th>
+            <th>前日比</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><%= current_user.books.where('created_at > ?', Date.today).count %></td>
+            <td><%= current_user.books.where('created_at > ?', Date.yesterday).count %></td>
+        </tr>
+
+    </tbody>
+</table>
+
+ <thead>
+        <tr>
+            <th>今週の投稿数</th>
+            <td>前週の投稿数</td>
+            <td>前週比</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><%= current_user.books.where('created_at > ?', (Time.current.at_end_of_day- 6.day).at_beginning_of_day).count %></td>
+            <td><%= current_user.books.where('created_at > ?', (Time.current.at_end_of_day - 12.day).at_beginning_of_day).count %></td>
+        </tr>
+
+    </tbody>
+</table>
+
+
